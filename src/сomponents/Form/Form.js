@@ -1,10 +1,12 @@
 // import React, { Component } from 'react';
+import { connect } from "react-redux";
+import phonebookActions from "../../redux/phonebook/phonebook-actions";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
 import s from "./Form.module.css";
 
-function Form({ submit }) {
+function Form() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
@@ -23,7 +25,7 @@ function Form({ submit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    submit({ id, name, number });
+    // onSubmit({ id, name, number });
 
     reset();
   };
@@ -67,6 +69,15 @@ function Form({ submit }) {
     </form>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (formData) => dispatch(phonebookActions.addContact(formData)),
+});
+export default connect(null, mapDispatchToProps)(Form);
+// export default Form
+// Form.propTypes = {
+//   submit: PropTypes.func.isRequired,
+// };
 
 //Class component without hooks
 
@@ -133,9 +144,3 @@ function Form({ submit }) {
 //     );
 //   }
 // }
-
-export default Form;
-
-Form.propTypes = {
-  submit: PropTypes.func.isRequired,
-};

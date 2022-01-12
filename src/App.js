@@ -7,57 +7,56 @@ import initialContacts from "./initialContacts.json";
 import s from "./App.module.css";
 
 function App() {
-  const [contacts, setContacts] = useState(initialContacts);
-  const [filter, setFilter] = useState("");
+  // const [contacts, setContacts] = useState(initialContacts);
+  // const [filter, setFilter] = useState("");
 
-  const formSubmitHandler = (formData) => {
-    const { name } = formData;
+  // useEffect(() => {
+  //   localStorage.setItem("contacts", JSON.stringify(contacts));
+  // }, [contacts]);
 
-    const existingContact = contacts.find((contact) => name === contact.name);
-    if (existingContact) {
-      return alert(`${name} is already in contacts`);
-    }
-    setContacts([formData, ...contacts]);
-  };
+  // useEffect(() => {
+  //   const contacts = localStorage.getItem("contacts");
+  //   const parsedContacts = JSON.parse(contacts);
 
-  const changeFilter = (e) => {
-    const { value } = e.currentTarget;
+  //   if (parsedContacts) {
+  //     setContacts(parsedContacts);
+  //   }
+  // }, []);
+  // const formSubmitHandler = (formData) => {
+  //   const { name } = formData;
 
-    setFilter(value);
-  };
+  //   const existingContact = contacts.find((contact) => name === contact.name);
+  //   if (existingContact) {
+  //     return alert(`${name} is already in contacts`);
+  //   }
+  //   setContacts([formData, ...contacts]);
+  // };
 
-  const findContact = () => {
-    const normalizeContacts = filter.toLowerCase();
+  // const changeFilter = (e) => {
+  //   const { value } = e.currentTarget;
 
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(normalizeContacts)
-    );
-  };
+  //   setFilter(value);
+  // };
 
-  const deleteContact = (contactId) => {
-    setContacts(contacts.filter((contact) => contact.id !== contactId));
-  };
+  // const findContact = () => {
+  //   const normalizeContacts = filter.toLowerCase();
 
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
+  //   return contacts.filter((contact) =>
+  //     contact.name.toLowerCase().includes(normalizeContacts)
+  //   );
+  // };
 
-  useEffect(() => {
-    const contacts = localStorage.getItem("contacts");
-    const parsedContacts = JSON.parse(contacts);
-
-    if (parsedContacts) {
-      setContacts(parsedContacts);
-    }
-  }, []);
+  // const deleteContact = (contactId) => {
+  //   setContacts(contacts.filter((contact) => contact.id !== contactId));
+  // };
 
   return (
     <Container>
       <h1 className={s.Title}>Phonebook</h1>
-      <Form submit={formSubmitHandler} />
-      <h2 className={s.Title}>Contacts</h2>
+      <Form />
+      {/* <h2 className={s.Title}>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
-      <Contacts contacts={findContact()} onDeleteContact={deleteContact} />
+      <Contacts contacts={findContact()} onDeleteContact={deleteContact} /> */}
     </Container>
   );
 }
