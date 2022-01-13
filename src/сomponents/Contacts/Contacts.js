@@ -23,8 +23,18 @@ const Contacts = ({ contacts, onDeleteContact }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { contacts: state.phonebook.contacts };
+const getVisibleContacts = (allContacts, filter) => {
+  const normalizedFilter = filter.toLowerCase();
+
+  return allContacts.filter(({ name }) =>
+    name.toLowerCase().includes(normalizedFilter)
+  );
+};
+
+const mapStateToProps = ({ phonebook: { contacts, filter } }) => {
+  return {
+    contacts: getVisibleContacts(contacts, filter),
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -33,13 +43,13 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contacts);
 
-// Contacts.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-//   onDeleteContact: PropTypes.func.isRequired,
-// };
+Contacts.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  onDeleteContact: PropTypes.func.isRequired,
+};

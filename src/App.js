@@ -1,15 +1,11 @@
-import { useState, useEffect } from "react";
 import Container from "./сomponents/Container";
 import Form from "./сomponents/Form";
 import Filter from "./сomponents/Filter";
 import Contacts from "./сomponents/Contacts";
-import initialContacts from "./initialContacts.json";
+
 import s from "./App.module.css";
 
 function App() {
-  // const [contacts, setContacts] = useState(initialContacts);
-  // const [filter, setFilter] = useState("");
-
   // useEffect(() => {
   //   localStorage.setItem("contacts", JSON.stringify(contacts));
   // }, [contacts]);
@@ -32,30 +28,12 @@ function App() {
   //   setContacts([formData, ...contacts]);
   // };
 
-  // const changeFilter = (e) => {
-  //   const { value } = e.currentTarget;
-
-  //   setFilter(value);
-  // };
-
-  // const findContact = () => {
-  //   const normalizeContacts = filter.toLowerCase();
-
-  //   return contacts.filter((contact) =>
-  //     contact.name.toLowerCase().includes(normalizeContacts)
-  //   );
-  // };
-
-  // const deleteContact = (contactId) => {
-  //   setContacts(contacts.filter((contact) => contact.id !== contactId));
-  // };
-
   return (
     <Container>
       <h1 className={s.Title}>Phonebook</h1>
       <Form />
       <h2 className={s.Title}>Contacts</h2>
-      {/* <Filter value={filter} onChange={changeFilter} /> */}
+      <Filter />
       <Contacts />
     </Container>
   );

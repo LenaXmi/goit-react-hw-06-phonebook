@@ -15,8 +15,13 @@ const contacts = (state = initialContacts, { type, payload }) => {
   }
 };
 
-const filter = (state = "", action) => {
-  return state;
+const filter = (state = "", { type, payload }) => {
+  switch (type) {
+    case types.CHANGE_FILTER:
+      return payload;
+    default:
+      return state;
+  }
 };
 
 export default combineReducers({
