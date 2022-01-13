@@ -77,7 +77,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(null, mapDispatchToProps)(Form);
 
 Form.propTypes = {
-  submit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 //Class component without hooks
