@@ -54,9 +54,9 @@ function App() {
     <Container>
       <h1 className={s.Title}>Phonebook</h1>
       <Form />
-      {/* <h2 className={s.Title}>Contacts</h2>
-      <Filter value={filter} onChange={changeFilter} />
-      <Contacts contacts={findContact()} onDeleteContact={deleteContact} /> */}
+      <h2 className={s.Title}>Contacts</h2>
+      {/* <Filter value={filter} onChange={changeFilter} /> */}
+      <Contacts />
     </Container>
   );
 }

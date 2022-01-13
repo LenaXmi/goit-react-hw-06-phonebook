@@ -8,6 +8,7 @@ const contacts = (state = initialContacts, { type, payload }) => {
     case types.ADD:
       return [payload, ...state];
     case types.DELETE:
+      return state.filter((contact) => contact.id !== payload);
 
     default:
       return state;

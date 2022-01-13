@@ -1,8 +1,11 @@
 import types from "./phonebook-types";
 
-const addContact = (formData) => ({
+export const addContact = (id, name, number) => ({
   type: types.ADD,
-  payload: formData,
+  payload: { id, name, number },
 });
 
-export default addContact;
+export const deleteContact = (contactId) => ({
+  type: types.DELETE,
+  payload: contactId,
+});

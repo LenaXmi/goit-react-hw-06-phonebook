@@ -1,3 +1,5 @@
+import { connect } from "react-redux";
+import { deleteContact } from "../../redux/phonebook/phonebook-actions";
 import PropTypes from "prop-types";
 import s from "./Contacts.module.css";
 
@@ -20,15 +22,24 @@ const Contacts = ({ contacts, onDeleteContact }) => {
     </ul>
   );
 };
-export default Contacts;
 
-Contacts.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  onDeleteContact: PropTypes.func.isRequired,
+const mapStateToProps = (state) => {
+  return { contacts: state.phonebook.contacts };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  onDeleteContact: (id) => dispatch(deleteContact(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Contacts);
+
+// Contacts.propTypes = {
+//   contacts: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     })
+//   ),
+//   onDeleteContact: PropTypes.func.isRequired,
+// };
