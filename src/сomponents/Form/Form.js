@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
 import s from "./Form.module.css";
 
-function Form({ onSubmit }) {
+function Form({ contacts, onSubmit }) {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
@@ -24,9 +24,12 @@ function Form({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const existingContact = contacts.find((contact) => name === contact.name);
 
+    if (existingContact) {
+      return alert(`${name} is already in contacts`);
+    }
     onSubmit(id, name, number);
-
     reset();
   };
 
@@ -70,11 +73,15 @@ function Form({ onSubmit }) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  contacts: state.phonebook.contacts,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (id, name, number) => dispatch(addContact(id, name, number)),
 });
 
-export default connect(null, mapDispatchToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
 Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,

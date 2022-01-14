@@ -4,17 +4,16 @@ import storage from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
 import phonebookReducer from "./phonebook/phonebook-reducers";
 
-const persistConfig = {
+const contactsPersistConfig = {
   key: "contacts",
   storage,
+  blacklist: ["filter"],
 };
 
 const rootReducer = combineReducers({
-  phonebook: phonebookReducer,
+  phonebook: persistReducer(contactsPersistConfig, phonebookReducer),
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const store = createStore(persistedReducer, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools());
 const persistor = persistStore(store);
 export default { store, persistor };
