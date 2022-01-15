@@ -5,29 +5,7 @@ import Contacts from "./сomponents/Contacts";
 
 import s from "./App.module.css";
 
-function App() {
-  // useEffect(() => {
-  //   localStorage.setItem("contacts", JSON.stringify(contacts));
-  // }, [contacts]);
-
-  // useEffect(() => {
-  //   const contacts = localStorage.getItem("contacts");
-  //   const parsedContacts = JSON.parse(contacts);
-
-  //   if (parsedContacts) {
-  //     setContacts(parsedContacts);
-  //   }
-  // }, []);
-  // const formSubmitHandler = (formData) => {
-  //   const { name } = formData;
-
-  //   const existingContact = contacts.find((contact) => name === contact.name);
-  //   if (existingContact) {
-  //     return alert(`${name} is already in contacts`);
-  //   }
-  //   setContacts([formData, ...contacts]);
-  // };
-
+const App = () => {
   return (
     <Container>
       <h1 className={s.Title}>Phonebook</h1>
@@ -37,7 +15,9 @@ function App() {
       <Contacts />
     </Container>
   );
-}
+};
+
+export default App;
 
 //Class component without hooks
 
@@ -114,5 +94,3 @@ function App() {
 //     );
 //   }
 // }
-
-export default App;

@@ -1,15 +1,17 @@
 // import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { addContact } from "../../redux/phonebook/phonebook-actions";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import PropTypes from "prop-types";
+import { addContact } from "../../redux/phonebook/phonebook-actions";
+import { getContacts } from "../../redux/phonebook/phonebook-selectors";
 import { nanoid } from "nanoid";
 import s from "./Form.module.css";
 
-function Form({ contacts, onSubmit }) {
+function Form() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.currentTarget;
@@ -29,7 +31,7 @@ function Form({ contacts, onSubmit }) {
     if (existingContact) {
       return alert(`${name} is already in contacts`);
     }
-    onSubmit(id, name, number);
+    dispatch(addContact(id, name, number));
     reset();
   };
 
@@ -73,19 +75,22 @@ function Form({ contacts, onSubmit }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  contacts: state.phonebook.contacts,
-});
+export default Form;
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (id, name, number) => dispatch(addContact(id, name, number)),
-});
+//Vanilla redux
+// const mapStateToProps = (state) => ({
+//   contacts: state.phonebook.contacts,
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+// const mapDispatchToProps = (dispatch) => ({
+//   onSubmit: (id, name, number) => dispatch(addContact(id, name, number)),
+// });
 
-Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+// export default connect(mapStateToProps, mapDispatchToProps)(Form);
+
+// Form.propTypes = {
+//   onSubmit: PropTypes.func.isRequired,
+// };
 
 //Class component without hooks
 
